@@ -244,6 +244,17 @@ describe('endpoint definition typings', () => {
       }),
     })
   })
+  test('injectEndpoints should return the correct hook types', () => {
+    const extendedApi = api.injectEndpoints({
+      endpoints: (build) => ({
+        example: build.query({
+          query: () => 'From' as const,
+        }),
+      }),
+      overrideExisting: false,
+    })
+    extendedApi.useExampleQuery
+  })
   test('mutation: query & transformResponse types', () => {
     api.injectEndpoints({
       endpoints: (build) => ({
